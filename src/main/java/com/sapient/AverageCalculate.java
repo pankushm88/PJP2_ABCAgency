@@ -1,38 +1,29 @@
 /**
  * 
- *//**
- * 
  */
 package com.sapient;
 
-/**
- * @author Pankush
- *
- */
-
-import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+public class AverageCalculate {
 
-public class App 
-{
-    public static void main( String[] args )
-    {
-    	String inputFile = "input.csv";
-		String outputFile = "output.csv";
+	public static List<String> average(HashMap<String, MyClass> map) {
 		
-		IncomeCalcuate Ic = new IncomeCalcuate();
 		
-		try {
-			
-			Ic.ReadFile(inputFile);
-			List<String> MyList=AverageCalculate.average(Ic.map);
-			Collections.sort(MyList);
-			Ic.WriteFile(MyList,outputFile);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-}
-    }
+		List<String> MyString = new ArrayList<String>();
+		
+		
+		for( var temp:map.entrySet())
+		{
+			MyClass Myclass=temp.getValue();
+			Double amount=Myclass.amount/Myclass.people;
+			amount=Math.round(amount*100)/100.0;
+			MyString.add(temp.getKey()+","+amount);
+		}
+		
+		
+		return MyString;
+	}
 }
